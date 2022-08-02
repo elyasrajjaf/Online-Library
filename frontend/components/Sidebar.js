@@ -2,11 +2,12 @@ import Link from "next/link"
 import styled from "styled-components"
 
 const Nav = styled.aside`
-    height: 100vh;
+    min-height: 100vh;
     padding: 8rem 3rem;
     margin: 10px;
     border-radius: 2rem;
     background-color: #3498db;
+    overflow: hidden;
 `
 
 const Lien = styled.a`

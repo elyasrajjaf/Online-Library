@@ -9,11 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "buffer": "^6.0.3",
     "formik": "^2.2.9",
+    "graceful-fs": "^4.2.10",
+    "graphql": "^16.5.0",
     "next": "12.2.3",
+    "node-fetch": "^3.2.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "readable-stream": "^4.1.0",
+    "stream-browserify": "^3.0.0",
     "styled-components": "^5.3.5",
+    "url": "^0.11.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

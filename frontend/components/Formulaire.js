@@ -1,5 +1,6 @@
 import { useFormik } from "formik"
-import * as Yup from "yup"
+import * as Yup from "yup" 
+import { useQuery, gql } from '@apollo/client'
 import styled from "styled-components";
 
 
@@ -8,6 +9,7 @@ const Form = styled.form`
     background-color: #fff;
     padding: 3.5rem  2.2rem;
     border-radius: 2rem;
+    box-sizing: border-box;
 `;
 
 const Titre = styled.h1`
@@ -48,20 +50,59 @@ const Text = styled.textarea`
 const Label = styled.div`
     margin-bottom: 0.7rem;
 `
+const Alerte = styled.p`
+    padding-left: 5px;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #f86f6f;
+`
+
+const QUERY = gql`
+    query getMovies {
+        getMovies {
+        id
+        title
+        author
+        description
+        publishedDate
+        duration
+        }
+    }
+`
 
 const Formulaire = () => {
+
+    // Get Movies
+    const { data, loading } = useQuery(QUERY)
+    console.log(data)
 
 
     // Validation de formulaire
     const formik = useFormik({
         initialValues: {
-            title: 'Hello',
+            title: '',
             author: '',
             description: '',
             cover: '',
             duration: '',
             publishedDate: ''
         },
+        validationSchema: Yup.object({
+            title: Yup.string()
+                      .required('Le titre est obligatoire'),
+            author: Yup.string()
+                       .required("Le nom d'auteur est obligatoire"),
+            description: Yup.string()
+                            .required('La description est obligatoire')
+                            .min(20, 'Vous devez écirer au moins 20 caractéres'),
+            cover: Yup.string()
+                      .required('Une couverture de film est requise'),
+            duration: Yup.number()
+                         .required('La duration de film est obligatoire'),
+            publishedDate: Yup.date()
+                              .required('Une date de publication est requise')
+        }),
         onSubmit: valeurs => {
             console.log('Enviando...')
             console.log(valeurs)
@@ -81,8 +122,14 @@ const Formulaire = () => {
                     placeholder="Titre de film"
                     value={formik.values.title}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </Label>
+            {formik.touched.title && formik.errors.title ? (
+                <Alerte>
+                    {formik.errors.title}
+                </Alerte>
+            ) : null }
             <Label>
                 <Input
                     id="author"
@@ -90,16 +137,28 @@ const Formulaire = () => {
                     placeholder="L'auteur de film"
                     value={formik.values.author}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </Label>
+            {formik.touched.author && formik.errors.author ? (
+                <Alerte>
+                    {formik.errors.author}
+                </Alerte>
+            ) : null }
             <Label>
                 <Text
                     id="description"
                     placeholder="Description de film"
                     value={formik.values.description}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </Label>
+            {formik.touched.description && formik.errors.description ? (
+                <Alerte>
+                    {formik.errors.description}
+                </Alerte>
+            ) : null }
             <Label>
                 <Input
                     id="cover"
@@ -107,8 +166,14 @@ const Formulaire = () => {
                     placeholder="Couverture de film"
                     value={formik.values.cover}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </Label>
+            {formik.touched.cover && formik.errors.cover ? (
+                <Alerte>
+                    {formik.errors.cover}
+                </Alerte>
+            ) : null }
             <Label>
                 <Input
                     id="duration"
@@ -116,16 +181,28 @@ const Formulaire = () => {
                     placeholder="Duration de film"
                     value={formik.values.duration}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </Label>
+            {formik.touched.duration && formik.errors.duration ? (
+                <Alerte>
+                    {formik.errors.duration}
+                </Alerte>
+            ) : null }
             <Label>
                 <Input
                     id="publishedDate"
                     type="date"
                     value={formik.values.publishedDate}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                 />
             </Label>
+            {formik.touched.publishedDate && formik.errors.publishedDate ? (
+                <Alerte>
+                    {formik.errors.publishedDate}
+                </Alerte>
+            ) : null }
 
             <Btn
                 type="submit"

@@ -12,8 +12,9 @@ const Content = styled.div`
     flex: 1;
     padding: 3rem 4rem;
     background-color: #ecf0f1;
-    height: 100vh;
+    min-height: 100vh;
     border-radius: 2rem;
+    box-sizing: border-box;
 `
 
 const Layout = ({children, page}) => {

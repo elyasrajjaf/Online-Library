@@ -100,8 +100,6 @@ const Formulaire = ({newMovie}) => {
                               .required('Une date de publication est requise')
         }),
         onSubmit: async valeurs => {
-            // console.log('Enviando...')
-            // console.log(valeurs)
 
             const { title, author, description, cover, duration, publishedDate } = valeurs
 
@@ -134,7 +132,7 @@ const Formulaire = ({newMovie}) => {
                 setTimeout(() => {
                     setMessage(null)
                 }, 3000)
-            }
+            }  
         }
     })
 
@@ -244,7 +242,7 @@ const Formulaire = ({newMovie}) => {
 
             <Btn
                 type="submit"
-                value="Ajouter le film"
+                value='Ajouter un film'
             />
         </Form>
     )

@@ -1,12 +1,12 @@
 import Layout from "../components/Layout"
 
-export default function Index() {
+export default function Movies() {
   return (
     <>
       <Layout
-        page={'Home'}
+        page={'Movies'}
       >
-        <h1>Desde index</h1>
+        <h1>Desdde Movies</h1>
       </Layout>
     </>
   )

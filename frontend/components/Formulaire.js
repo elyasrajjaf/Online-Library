@@ -1,6 +1,6 @@
 import { useFormik } from "formik"
 import * as Yup from "yup" 
-import { useQuery, gql } from '@apollo/client'
+
 import styled from "styled-components";
 
 
@@ -58,25 +58,8 @@ const Alerte = styled.p`
     color: #f86f6f;
 `
 
-const QUERY = gql`
-    query getMovies {
-        getMovies {
-        id
-        title
-        author
-        description
-        publishedDate
-        duration
-        }
-    }
-`
 
-const Formulaire = () => {
-
-    // Get Movies
-    const { data, loading } = useQuery(QUERY)
-    console.log(data)
-
+const Formulaire = ({newMovie}) => {
 
     // Validation de formulaire
     const formik = useFormik({
@@ -103,9 +86,30 @@ const Formulaire = () => {
             publishedDate: Yup.date()
                               .required('Une date de publication est requise')
         }),
-        onSubmit: valeurs => {
-            console.log('Enviando...')
-            console.log(valeurs)
+        onSubmit: async valeurs => {
+            // console.log('Enviando...')
+            // console.log(valeurs)
+
+            const { title, author, description, cover, duration, publishedDate } = valeurs
+
+            try {
+                const { data } = await newMovie({
+                    variables: {
+                        input: {
+                            title,
+                            author,
+                            description,
+                            cover,
+                            duration,
+                            publishedDate
+                        }
+                    }
+                })
+                console.log(data)
+                // Film ajouter avec succès
+            } catch (error) {
+                console.log(error)
+            }
         }
     })
 

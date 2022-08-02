@@ -18,6 +18,7 @@ const typeDefs = gql`
         description: String!
         cover: String!
         duration: Int!
+        publishedDate: String
     }
 
     type Query {

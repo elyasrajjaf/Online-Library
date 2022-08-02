@@ -16,7 +16,7 @@ const resolvers = {
             const movie = await Movie.findById(id)
 
             if(!movie) {
-                throw new Error("Le film n'existe pas")
+                throw new Error("Film introuvable")
             }
 
             return movie
@@ -41,6 +41,30 @@ const resolvers = {
             } catch (error) {
                 console.log(error)
             }
+        },
+        updateMovie: async (_, {id, input}) => {
+            // Vérifier que le film existe
+            let movie = await Movie.findById(id)
+
+            if(!movie) {
+                throw new Error("Film introuvable")
+            }
+
+            // Enregistrer le film dans la db
+            movie = await Movie.findOneAndUpdate({ _id : id }, input, { new: true })
+            return movie
+        },
+        deleteMovie: async (_, {id}) => {
+            // Vérifier que le film existe
+            let movie = await Movie.findById(id)
+
+            if(!movie) {
+                throw new Error("Film introuvable")
+            }
+
+            // Suprimer le film
+            await Movie.findByIdAndDelete({ _id : id })
+            return "Film supprimé avec succès"
         }
     }
 }

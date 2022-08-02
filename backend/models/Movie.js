@@ -32,4 +32,6 @@ const MoviesSchema = mongoose.Schema({
     }
 })
 
+MoviesSchema.index({ title: 'text', author: 'text' })
+
 module.exports = mongoose.model('Movie', MoviesSchema)

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useRouter } from "next/router"
 import { useFormik } from "formik"
 import * as Yup from "yup" 
 
@@ -57,9 +59,20 @@ const Alerte = styled.p`
     font-size: 1rem;
     color: #f86f6f;
 `
+const Message = styled.p`
+    padding-left: 5px;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: blue;
+`
 
 
 const Formulaire = ({newMovie}) => {
+
+    const [message, setMessage] = useState(null)
+
+    const router = useRouter()
 
     // Validation de formulaire
     const formik = useFormik({
@@ -106,12 +119,32 @@ const Formulaire = ({newMovie}) => {
                     }
                 })
                 console.log(data)
+
+
                 // Film ajouter avec succès
+                setMessage(`Le film ${data.newMovie.title} a été créé avec succès.`)
+                setTimeout(() => {
+                    setMessage(null)
+                    router.push('/liste-films')
+                }, 3000)
+                
+
             } catch (error) {
-                console.log(error)
+                setMessage(error.message.replace('GraphQL error: ', ''))
+                setTimeout(() => {
+                    setMessage(null)
+                }, 3000)
             }
         }
     })
+
+    const afficherMessage = () => {
+        return(
+            <Message>
+                {message}
+            </Message>
+        )
+    }
 
 
     return (
@@ -119,6 +152,7 @@ const Formulaire = ({newMovie}) => {
             onSubmit={formik.handleSubmit}
         >
             <Titre>Ajouter un nouveau film</Titre>
+            {message && afficherMessage()}
             <Label>
                 <Input
                     id="title"

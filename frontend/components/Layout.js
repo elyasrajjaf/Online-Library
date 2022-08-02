@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import styled from "styled-components";
-
-import Sidebar from './Sidebar';
+import Header from './Header';
 
 const Container = styled.main`
     display: flex;
@@ -10,10 +9,9 @@ const Container = styled.main`
 `
 const Content = styled.div`
     flex: 1;
-    padding: 3rem 4rem;
+    padding: 5rem;
     background-color: #ecf0f1;
     min-height: 100vh;
-    border-radius: 2rem;
     box-sizing: border-box;
 `
 
@@ -26,8 +24,8 @@ const Layout = ({children, page}) => {
         </Head>
 
         <main>
+            <Header/>
             <Container>
-                <Sidebar/>
                 <Content>
                     {children}
                 </Content>

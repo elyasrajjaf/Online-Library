@@ -1,6 +1,5 @@
 import { useRouter } from "next/router"
-import { useFormik } from "formik"
-import * as Yup from "yup" 
+import { useQuery, gql } from "@apollo/client"
 import Layout from "../../components/Layout"
 import styled from "styled-components";
 
@@ -56,27 +55,31 @@ const Text = styled.textarea`
 const Label = styled.div`
     margin-bottom: 0.7rem;
 `
-const Alerte = styled.p`
-    padding-left: 5px;
-    width: 100%;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    color: #f86f6f;
-`
-const Message = styled.p`
-    padding-left: 5px;
-    width: 100%;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    color: blue;
+
+const GET_ONE_MOVIE = gql`
+  query getMovie($movieId: ID!) {
+    getMovie(movieId: $movieId) {
+      title
+      author
+    }
+  }
 `
 
 const UpdateMovie = () => {
 
     const router = useRouter()
-    const { query: { id }} = router
-    console.log(id)
+    const { query: { id } } = router
 
+    // Obtenir le film par id
+    const { data } = useQuery(GET_ONE_MOVIE, {
+      variables: {
+        movieId: id
+      }
+    });
+
+    console.log(data)
+    
+  
     return (
       <Layout
         page={'Modification'}
@@ -85,7 +88,7 @@ const UpdateMovie = () => {
           <Form
               // onSubmit={formik.handleSubmit}
           >
-              <Titre>Ajouter un nouveau film</Titre>
+              <Titre>Modifier un film</Titre>
               <Label>
                   <Input
                       id="title"
@@ -177,7 +180,7 @@ const UpdateMovie = () => {
 
               <Btn
                   type="submit"
-                  value='Ajouter un film'
+                  value='Mettre à jour'
               />
           </Form>
         </UptdMovie>

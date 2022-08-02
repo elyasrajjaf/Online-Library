@@ -21,10 +21,14 @@ const typeDefs = gql`
     }
 
     type Query {
-        getMovie: String  
+        # Obtenir tous les films
+        getMovies: [Movie]
+        # Obtenir un film par id
+        getMovie(id: ID!): Movie
     }
 
     type Mutation {
+        # Création d'un film
         newMovie(input: MovieInput): Movie
     }
 

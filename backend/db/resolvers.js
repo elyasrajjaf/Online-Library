@@ -3,7 +3,24 @@ const Movie = require('../models/Movie')
 // Resolvers
 const resolvers = {
     Query: {
-        getMovie: () => 'Algo' 
+        getMovies: async () => {
+            try {
+                const movies = await Movie.find({})
+                return movies
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        getMovie: async (_, {id}) => {
+            // Vérifier que le film existe
+            const movie = await Movie.findById(id)
+
+            if(!movie) {
+                throw new Error("Le film n'existe pas")
+            }
+
+            return movie
+        }
     },
     Mutation: {
         newMovie: async (_, {input}) => {

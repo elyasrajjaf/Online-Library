@@ -1,10 +1,10 @@
 import Layout from "../components/Layout"
 
-export default function Movies() {
+export default function ListeFIlms() {
   return (
     <>
       <Layout
-        page={'Movies'}
+        page={'Liste des films'}
       >
         <h1>Desdde Movies</h1>
       </Layout>

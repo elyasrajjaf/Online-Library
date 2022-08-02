@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useFormik } from "formik"
+import * as Yup from "yup"
 import styled from "styled-components";
+
 
 const Form = styled.form`
     width: 50%;
@@ -8,7 +10,7 @@ const Form = styled.form`
     border-radius: 2rem;
 `;
 
-const Title = styled.h1`
+const Titre = styled.h1`
     margin-bottom: 2rem;
     font-size: 2.2rem;
     font-weight: 500;
@@ -23,7 +25,7 @@ const Input = styled.input`
     box-sizing: border-box;
 `
 
-const Button = styled.input`
+const Btn = styled.input`
     all: unset;
     padding: 14px 10px;
     background-color: blue;
@@ -49,19 +51,36 @@ const Label = styled.div`
 
 const Formulaire = () => {
 
-    const [title, setTitle] = useState('')
+
+    // Validation de formulaire
+    const formik = useFormik({
+        initialValues: {
+            title: 'Hello',
+            author: '',
+            description: '',
+            cover: '',
+            duration: '',
+            publishedDate: ''
+        },
+        onSubmit: valeurs => {
+            console.log('Enviando...')
+            console.log(valeurs)
+        }
+    })
 
 
     return (
-        <Form>
-            <Title>Ajouter un nouveau film</Title>
+        <Form
+            onSubmit={formik.handleSubmit}
+        >
+            <Titre>Ajouter un nouveau film</Titre>
             <Label>
                 <Input
                     id="title"
                     type="text"
                     placeholder="Titre de film"
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
                 />
             </Label>
             <Label>
@@ -69,12 +88,16 @@ const Formulaire = () => {
                     id="author"
                     type="text"
                     placeholder="L'auteur de film"
+                    value={formik.values.author}
+                    onChange={formik.handleChange}
                 />
             </Label>
             <Label>
                 <Text
                     id="description"
                     placeholder="Description de film"
+                    value={formik.values.description}
+                    onChange={formik.handleChange}
                 />
             </Label>
             <Label>
@@ -82,6 +105,8 @@ const Formulaire = () => {
                     id="cover"
                     type="text"
                     placeholder="Couverture de film"
+                    value={formik.values.cover}
+                    onChange={formik.handleChange}
                 />
             </Label>
             <Label>
@@ -89,16 +114,20 @@ const Formulaire = () => {
                     id="duration"
                     type="number"
                     placeholder="Duration de film"
+                    value={formik.values.duration}
+                    onChange={formik.handleChange}
                 />
             </Label>
             <Label>
                 <Input
                     id="publishedDate"
                     type="date"
+                    value={formik.values.publishedDate}
+                    onChange={formik.handleChange}
                 />
             </Label>
 
-            <Button
+            <Btn
                 type="submit"
                 value="Ajouter le film"
             />

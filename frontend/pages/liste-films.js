@@ -1,8 +1,9 @@
 import Link from "next/link"
 import { gql, useQuery } from "@apollo/client"
 import Layout from "../components/Layout"
+import Film from "../components/Film"
 import styled from "styled-components"
-import { formaterDate } from '../helpers/index'
+
 
 const Table = styled.table`
   table-layout: auto;
@@ -32,13 +33,13 @@ const Table = styled.table`
         justify-content: space-around;
         align-items: center;
         background-color: #d6d3d1;
-        a {
+        button {
           text-decoration: none;
         }
-        a:first-child {
+        button:first-child {
           color: blue;
         }
-        a:last-child {
+        button:last-child {
           color: red;
         }
       }
@@ -58,7 +59,7 @@ const GET_MOVIES = gql`
   }
 `
 
-export default function ListeFIlms() {
+export default function ListeFilms() {
 
   // Apollo
   const { data, loading, error } = useQuery(GET_MOVIES)
@@ -83,16 +84,10 @@ export default function ListeFIlms() {
           </thead>
           <tbody>
             {data.getMovies.map( movie => (
-              <tr key={movie.id}>
-                <td>{movie.title}</td>
-                <td>{movie.author}</td>
-                <td>{movie.duration}</td>
-                <td>{formaterDate(Number(movie.publishedDate))}</td>
-                <td>
-                  <Link href={'/'}><a>Modifier</a></Link>
-                  <Link href={'/'}><a>Supprimer</a></Link>
-                </td>
-              </tr>
+              <Film
+                key={movie.id}
+                movie={movie}
+              />
             ))}
           </tbody>
         </Table>

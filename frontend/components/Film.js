@@ -78,7 +78,7 @@ const Film = ({movie}) => {
 
     const modifierFilm = () => {
         Router.push({
-            pathname: "/modifierfilm/[id]",
+            pathname: "/modifier-film/[id]",
             query: { id }
         })
     }

@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { gql, useQuery } from "@apollo/client"
 import Layout from "../components/Layout"
 import Film from "../components/Film"
@@ -33,14 +32,26 @@ const Table = styled.table`
         display: flex;
         justify-content: space-around;
         align-items: center;
+        gap: 1rem;
         button {
-          text-decoration: none;
+          all: unset;
+          padding: 0.5rem 1rem;
+          color: white;
+          border-radius: 0.5rem;
+          transition: 0.4s ease;
+          cursor: pointer;
         }
         button:first-child {
-          color: blue;
+          background-color: #3b82f6;
+          :hover {
+            background-color: #1e40af;
+          }
         }
         button:last-child {
-          color: red;
+          background-color: #ef4444;
+          :hover {
+            background-color: #991b1b;
+          }
         }
       }
     }

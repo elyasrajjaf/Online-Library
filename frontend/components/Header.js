@@ -2,7 +2,7 @@ import Link from "next/link"
 import styled from "styled-components"
 
 const Nav = styled.aside`
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 5rem;
     background-color: #3498db;
 `
 const Container = styled.main`
@@ -24,15 +24,32 @@ const Lien = styled.a`
 const Logo = styled.span`
     font-size: 2rem;
     color: white;
+    cursor: pointer;
+    :hover {
+        color: #fefefe;
+    }
 
 `
-
+const Search = styled.input`
+    all: unset;
+    padding: 12px 18px;
+    background-color: #ecf0f1;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+`
 const Header = () => {
   return (
     <Nav>
         <Container>
-                <Logo>OnL</Logo>
+            <Link href="/">
+                <Logo>
+                    OnL
+                </Logo>
+            </Link>
             <nav>
+                <Link
+                    href="/"
+                ><Lien>Accueil</Lien></Link> 
                 <Link
                     href="/ajouter-film"
                 ><Lien>Ajouter un nouveau film</Lien></Link> 
@@ -40,7 +57,10 @@ const Header = () => {
                     href="/liste-films"
                 ><Lien>Liste des films</Lien></Link> 
             </nav>
-
+            <Search
+                type='search'
+                placeholder="Rechercher film "
+            />
         </Container>
     </Nav>
   )

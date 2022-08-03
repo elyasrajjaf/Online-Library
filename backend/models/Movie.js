@@ -27,8 +27,7 @@ const MoviesSchema = mongoose.Schema({
         trim: true
     },
     publishedDate: {
-        type: Date,
-        default: Date.now()
+        type: String
     }
 })
 

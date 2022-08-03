@@ -9,6 +9,32 @@ const Movie = styled.div`
     grid-template-columns: repeat(6, 2fr);
     gap: 1rem;
 `
+const Search = styled.div`
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    padding: 12px 18rem;
+    input {
+      all: unset;
+      flex: 1;
+      margin-right: 1rem;
+      border-radius: 0.5rem;
+      background-color: #fff;
+      padding: 12px 14px;
+    }
+    button {
+      all: unset;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      color: white;
+      padding: 12px 14px;
+      transition: 0.4s ease;
+      background-color: #3b82f6;
+          :hover {
+            background-color: #1e40af;
+          }
+    }
+`
 
 const GET_MOVIES = gql`
   query getMovies {
@@ -24,11 +50,13 @@ const GET_MOVIES = gql`
   }
 `
 
+
+
 export default function Index() {
 
   // Apollo
   const { data, loading, error } = useQuery(GET_MOVIES)
-  console.log(data)
+   
 
   if(loading) return 'Chargement...'
 
@@ -37,6 +65,15 @@ export default function Index() {
       <Layout
         page={'Accueil'}
       >
+        <Search>
+          <input
+                  type='search'
+                  placeholder="Rechercher film..."
+          />
+          <button
+            type="submit"
+          >Rechercher</button>
+        </Search>
         <Movie>{data.getMovies.map( movie => (
           <FilmAccueil
             key={movie.id}

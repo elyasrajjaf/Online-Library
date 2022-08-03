@@ -30,14 +30,10 @@ const Logo = styled.span`
     }
 
 `
-const Search = styled.input`
-    all: unset;
-    padding: 12px 18px;
-    background-color: #ecf0f1;
-    border-radius: 0.5rem;
-    box-sizing: border-box;
-`
+
+
 const Header = () => {
+
   return (
     <Nav>
         <Container>
@@ -57,10 +53,7 @@ const Header = () => {
                     href="/liste-films"
                 ><Lien>Liste des films</Lien></Link> 
             </nav>
-            <Search
-                type='search'
-                placeholder="Rechercher film "
-            />
+           
         </Container>
     </Nav>
   )

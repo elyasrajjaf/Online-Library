@@ -13,6 +13,7 @@ const typeDefs = gql`
     }
 
     input MovieInput {
+        id: ID
         title: String!
         author: String!
         description: String!
@@ -26,7 +27,7 @@ const typeDefs = gql`
         getMovies: [Movie]
 
         # Obtenir un film par id
-        getMovie(movieId: ID!): Movie
+        getMovie(id: ID!) : Movie
 
         # Rechercher film
         searchMovie(text: String!) : [Movie]

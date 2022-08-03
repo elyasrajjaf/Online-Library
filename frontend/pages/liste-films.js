@@ -14,7 +14,7 @@ const Table = styled.table`
     tr {
       color: white;
       th {
-        width: 20%;
+        width: 30%;
         padding: 8px 0;
         font-weight: 500;
       }
@@ -27,12 +27,12 @@ const Table = styled.table`
       td {
         padding: 4px 8px;
         text-align: center;
+        text-transform: uppercase;
       }
       td:last-child {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        background-color: #d6d3d1;
         button {
           text-decoration: none;
         }

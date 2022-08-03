@@ -118,7 +118,6 @@ const Formulaire = ({newMovie}) => {
                 })
                 console.log(data)
 
-
                 // Film ajouter avec succès
                 setMessage(`Le film ${data.newMovie.title} a été créé avec succès.`)
                 setTimeout(() => {

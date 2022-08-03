@@ -88,7 +88,7 @@ const Film = ({movie}) => {
         <tr>
             <td>{title}</td>
             <td>{author}</td>
-            <td>{duration}</td>
+            <td>{duration} minutes</td>
             <td>{formaterDate(Number(publishedDate))}</td>
             <td>
                 <button

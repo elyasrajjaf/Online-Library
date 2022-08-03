@@ -8,3 +8,9 @@ export const formaterDate = date => {
 
     return nouvelleDate.toLocaleDateString('fr-FR', options)
 }
+
+export const dateFormat = date => {
+    const nouvelleDate = new Date(date)
+
+    return nouvelleDate.toISOString().split('T')[0]
+}

@@ -11,9 +11,9 @@ const resolvers = {
                 console.log(error)
             }
         },
-        getMovie: async (_, {movieId}) => {
+        getMovie: async (_, {id}) => {
             // Vérifier que le film existe
-            const movie = await Movie.findById(movieId)
+            const movie = await Movie.findById(id)
 
             if(!movie) {
                 throw new Error("Film introuvable")

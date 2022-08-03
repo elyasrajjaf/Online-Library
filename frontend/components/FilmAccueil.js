@@ -1,11 +1,17 @@
 import Image from "next/image"
+import Router from "next/router"
 import {formaterDate} from '../helpers/index'
 import styled from "styled-components"
 
 const CardMovie = styled.div`
-    padding: 2rem 1.3rem;
+    padding: 1rem;
     background-color: white;
-    border-radius: 1rem;
+
+    transition: 0.2s;
+    :hover {
+        cursor: pointer;
+        box-shadow: 0 0 8px -1px #60a5fa;
+    }
 `
 const CardContent = styled.div`
     display: flex;
@@ -29,28 +35,45 @@ const CardContent = styled.div`
 
     }
 `
+const Btn = styled.button`
+    all: unset;
+`
+
 const FilmAccueil = ({movie}) => {
 
-    const { title, author, cover, publishedDate } = movie
+    const { id, title, author, cover, publishedDate } = movie
+
+    const voirFilm = () => {
+        Router.push({
+            pathname: "/voir-film/[id]",
+            query: { id }
+        })
+    }
 
     return (
         <>
-            <CardMovie>
-                <Image
-                    layout="responsive"
-                    width={30}
-                    height={40}
-                    src={`/assets/${cover}`}
-                    alt={`Cover de film ${title}`}
-                />
-                <CardContent>
-                    <h2>{title}</h2>
-                    <div>
-                        <p>{author}</p>
-                        <span>{formaterDate(Number(publishedDate))}</span>
-                    </div>
-                </CardContent>
-            </CardMovie>
+            <Btn
+                type="button"
+                onClick={() => voirFilm()}
+            >
+                <CardMovie>
+                    <Image
+                        style={{ borderRadius: '0.7rem'}}
+                        layout="responsive"
+                        width={30}
+                        height={40}
+                        src={`/assets/${cover}`}
+                        alt={`Cover de film ${title}`}
+                    />
+                    <CardContent>
+                        <h2>{title}</h2>
+                        <div>
+                            <p>{author}</p>
+                            <span>{formaterDate(Number(publishedDate))}</span>
+                        </div>
+                    </CardContent>
+                </CardMovie>
+            </Btn>
         </>
         
     )

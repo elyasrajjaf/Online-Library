@@ -6,7 +6,7 @@ import styled from "styled-components"
 
 const Movie = styled.div`
     display: grid;
-    grid-template-columns: repeat(5, 2fr);
+    grid-template-columns: repeat(6, 2fr);
     gap: 1rem;
 `
 

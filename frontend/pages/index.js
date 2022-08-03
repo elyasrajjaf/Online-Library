@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { gql, useQuery } from "@apollo/client"
 import Layout from "../components/Layout"
 import FilmAccueil from "../components/FilmAccueil"
@@ -9,12 +10,12 @@ const Movie = styled.div`
     grid-template-columns: repeat(6, 2fr);
     gap: 1rem;
 `
-const Search = styled.div`
+const Search = styled.form`
     display: flex;
     justify-content: space-around;
     margin-bottom: 2rem;
     padding: 12px 18rem;
-    input {
+    input:first-child {
       all: unset;
       flex: 1;
       margin-right: 1rem;
@@ -22,7 +23,7 @@ const Search = styled.div`
       background-color: #fff;
       padding: 12px 14px;
     }
-    button {
+    input:last-child {
       all: unset;
       cursor: pointer;
       border-radius: 0.5rem;
@@ -34,6 +35,11 @@ const Search = styled.div`
             background-color: #1e40af;
           }
     }
+`
+const Titre = styled.h1`
+  font-weight: 600;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
 `
 
 const GET_MOVIES = gql`
@@ -49,15 +55,23 @@ const GET_MOVIES = gql`
     }
   }
 `
-
-
+const SEARCH_MOVIE = gql`
+  query searchMovie($text: String!) {
+    searchMovie(text: $text) {
+      title
+      author
+    }
+  }
+`
+const Elyas = 20
 
 export default function Index() {
 
   // Apollo
   const { data, loading, error } = useQuery(GET_MOVIES)
-   
+  // console.log(error)
 
+  
   if(loading) return 'Chargement...'
 
   return (
@@ -65,15 +79,19 @@ export default function Index() {
       <Layout
         page={'Accueil'}
       >
-        <Search>
+        <Search
+          
+        >
           <input
-                  type='search'
-                  placeholder="Rechercher film..."
+            type='search'
+            placeholder="Rechercher film..."
           />
-          <button
+          <input
             type="submit"
-          >Rechercher</button>
+            value="Rechercher"
+          />
         </Search>
+        <Titre>Films Anime Disponible</Titre>
         <Movie>{data.getMovies.map( movie => (
           <FilmAccueil
             key={movie.id}

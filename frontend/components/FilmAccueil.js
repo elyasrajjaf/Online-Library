@@ -4,13 +4,11 @@ import {formaterDate} from '../helpers/index'
 import styled from "styled-components"
 
 const CardMovie = styled.div`
-    padding: 1rem;
-    background-color: white;
-
+    padding: 0.8rem;
     transition: 0.2s;
     :hover {
         cursor: pointer;
-        box-shadow: 0 0 8px -1px #60a5fa;
+        border-bottom: 1px solid blue;
     }
 `
 const CardContent = styled.div`
@@ -24,13 +22,15 @@ const CardContent = styled.div`
         -webkit-line-clamp: 1;
         overflow: hidden;
         margin-top: 1.2rem;
-        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: capitalize;
+        font-size: 1.2rem;
     }
     div {
         display: flex;
         justify-content: space-between;
         p {
-            color: blue;
+            color: gray;
         }
 
     }
@@ -60,7 +60,7 @@ const FilmAccueil = ({movie}) => {
                     <Image
                         style={{ borderRadius: '0.7rem'}}
                         layout="responsive"
-                        width={30}
+                        width={28}
                         height={40}
                         src={`/assets/${cover}`}
                         alt={`Cover de film ${title}`}

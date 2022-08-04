@@ -4,7 +4,6 @@ import Layout from "../../components/Layout"
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Swal from "sweetalert2"
-import { dateFormat } from "../../helpers"
 import styled from "styled-components";
 
 const UptdMovie = styled.div`
@@ -135,11 +134,11 @@ const UpdateMovie = () => {
   
     if(loading) return 'Chargement...'
 
-    const { getMovie } = data
+    const { getMovie } = data || ''
 
     // Modifier le film dans la base de données
     const modificationFilm = async values => {
-        const { title, author, description, cover, duration, publishedDate } = values
+        const { title, author, description, cover, duration, publishedDate } = values || ''
 
         try {
             const { data } = await updateMovie({

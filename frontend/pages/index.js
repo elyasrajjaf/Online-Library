@@ -69,14 +69,12 @@ export default function Index() {
   const [valeur, setValeur] = useState('')
   
   const films = useQuery(GET_MOVIES)
-  console.log(films)
 
   const film = useQuery(SEARCH_MOVIE, {
     variables: {
       text
     }
   })
-  console.log(film)
 
   const errors = films.error || film.error;
   const loading = films.loading || film.loading;
@@ -84,6 +82,7 @@ export default function Index() {
   const handleSearch = e => {
     setText(valeur)
   }
+
 
   if(loading) return 'Chargement...'
 
@@ -115,7 +114,6 @@ export default function Index() {
         ))}
           </Movie>
         ) : (
-
           <Movie>{films.data.getMovies.map( movie => (
             <FilmAccueil
               key={movie.id}

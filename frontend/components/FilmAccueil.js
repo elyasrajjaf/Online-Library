@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Router from "next/router"
-import {formaterDate} from '../helpers/index'
+
 import styled from "styled-components"
 
 const CardMovie = styled.div`
@@ -67,10 +67,6 @@ const FilmAccueil = ({movie}) => {
                     />
                     <CardContent>
                         <h2>{title}</h2>
-                        <div>
-                            <p>{author}</p>
-                            <span>{formaterDate(Number(publishedDate))}</span>
-                        </div>
                     </CardContent>
                 </CardMovie>
             </Btn>

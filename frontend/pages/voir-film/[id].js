@@ -100,7 +100,7 @@ const PreviewMovie = () => {
                     <Content>
                         <h3>Réalisateur: <span>{author}</span></h3>
                         <h5>Durée: <span>{duration} minutes</span></h5>
-                        <h6>Date de sortie: <span>{formaterDate(Number(publishedDate))}</span></h6>
+                        <h6>Date de sortie: <span>{formaterDate(publishedDate)}</span></h6>
                         <p><span>Synopsis:</span> {description}</p>
                     </Content>
                 </CardMovie>

@@ -10,7 +10,7 @@ const Movie = styled.div`
     grid-template-columns: repeat(6, 2fr);
     gap: 1rem;
 `
-const Search = styled.form`
+const Search = styled.div`
     display: flex;
     justify-content: space-around;
     margin-bottom: 2rem;
@@ -23,7 +23,7 @@ const Search = styled.form`
       background-color: #fff;
       padding: 12px 14px;
     }
-    input:last-child {
+    button:last-child {
       all: unset;
       cursor: pointer;
       border-radius: 0.5rem;
@@ -63,7 +63,6 @@ const SEARCH_MOVIE = gql`
     }
   }
 `
-const Elyas = 20
 
 export default function Index() {
 
@@ -71,7 +70,6 @@ export default function Index() {
   const { data, loading, error } = useQuery(GET_MOVIES)
   // console.log(error)
 
-  
   if(loading) return 'Chargement...'
 
   return (
@@ -80,24 +78,24 @@ export default function Index() {
         page={'Accueil'}
       >
         <Search
-          
+        
         >
           <input
             type='search'
             placeholder="Rechercher film..."
           />
-          <input
+          <button
             type="submit"
-            value="Rechercher"
-          />
+          >Rechercher</button>
         </Search>
         <Titre>Films Anime Disponible</Titre>
-        <Movie>{data.getMovies.map( movie => (
-          <FilmAccueil
-            key={movie.id}
-            movie={movie}
-          />
-        ))}</Movie>
+          <Movie>{data.getMovies.map( movie => (
+            <FilmAccueil
+              key={movie.id}
+              movie={movie}
+            />
+        ))}
+          </Movie>
       </Layout>
     </>
   )

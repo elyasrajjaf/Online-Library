@@ -78,25 +78,26 @@ const PreviewMovie = () => {
     
     if(loading) return 'Chargement...'
     
-    const { getMovie } = data
-    const { title, author, description, cover, duration, publishedDate } = getMovie
+    const { getMovie } = data || ''
+    const { title, author, description, cover, duration, publishedDate } = getMovie || ''
 
     return (
         <Layout
             page={`${title}`}
         >
+            { title ? (
             <div>
                 <Titre>{title}</Titre>
-                <CardMovie>
-                    <Img>
-                        <Image
-                            layout="responsive"
-                            width={30}
-                            height={40}
-                            src={`/assets/${cover}`}
-                            alt={`Cover de film ${title}`}
-                        />
-                    </Img>
+                    <CardMovie>
+                        <Img>
+                            <Image
+                                layout="responsive"
+                                width={30}
+                                height={40}
+                                src={`/assets/${cover}`}
+                                alt={`Cover de film ${title}`}
+                            />
+                        </Img>
                     <Content>
                         <h3>Réalisateur: <span>{author}</span></h3>
                         <h5>Durée: <span>{duration} minutes</span></h5>
@@ -105,6 +106,8 @@ const PreviewMovie = () => {
                     </Content>
                 </CardMovie>
             </div>
+            ) : 'Film introuvable'}
+            
         </Layout>
     )
 }

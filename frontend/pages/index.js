@@ -1,9 +1,9 @@
+import { useState, useEffect } from "react"
 import { gql, useQuery } from "@apollo/client"
 import Layout from "../components/Layout"
 import FilmAccueil from "../components/FilmAccueil"
 
 import styled from "styled-components"
-import { useState } from "react"
 
 const Movie = styled.div`
     display: grid;
@@ -65,44 +65,56 @@ const SEARCH_MOVIE = gql`
 export default function Index() {
 
   // State pour filtrer la recherche
-  const [text, setText] = useState('dragon')
+  const [text, setText] = useState('')
+  
+  const films = useQuery(GET_MOVIES)
+  console.log(films)
 
-  // Apollo
-  const { data, loading, error } = useQuery(GET_MOVIES, SEARCH_MOVIE, {
+  const film = useQuery(SEARCH_MOVIE, {
     variables: {
       text
     }
   })
-  
+  console.log(film)
+
+  const errors = films.error || film.error;
+  const loading = films.loading || film.loading;
+
   if(loading) return 'Chargement...'
-  
-  const { getMovies, searchMovie } = data
-  console.log(searchMovie)
+
 
   return (
     <>
       <Layout
         page={'Accueil'}
       >
-        <Search
-        
-        >
+        <Search>
           <input
             type='search'
             placeholder="Rechercher film..."
+            value={text}
+            onChange={e => setText(e.target.value)}
           />
-          <button
-            type="submit"
-          >Rechercher</button>
         </Search>
         <Titre>Films Anime Disponible</Titre>
-          <Movie>{getMovies.map( movie => (
+        {text ? (
+          <Movie>{film.data.searchMovie.map( movie => (
             <FilmAccueil
               key={movie.id}
               movie={movie}
             />
         ))}
           </Movie>
+        ) : (
+
+          <Movie>{films.data.getMovies.map( movie => (
+            <FilmAccueil
+              key={movie.id}
+              movie={movie}
+            />
+        ))}
+          </Movie>
+        )}
       </Layout>
     </>
   )

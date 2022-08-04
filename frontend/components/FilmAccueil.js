@@ -41,7 +41,7 @@ const Btn = styled.button`
 
 const FilmAccueil = ({movie}) => {
 
-    const { id, title, author, cover, publishedDate } = movie
+    const { id, title, cover } = movie
 
     const voirFilm = () => {
         Router.push({
@@ -52,24 +52,26 @@ const FilmAccueil = ({movie}) => {
 
     return (
         <>
-            <Btn
+            { id ? (
+                <Btn
                 type="button"
                 onClick={() => voirFilm()}
-            >
-                <CardMovie>
-                    <Image
-                        style={{ borderRadius: '0.7rem'}}
-                        layout="responsive"
-                        width={28}
-                        height={40}
-                        src={`/assets/${cover}`}
-                        alt={`Cover de film ${title}`}
-                    />
-                    <CardContent>
-                        <h2>{title}</h2>
-                    </CardContent>
-                </CardMovie>
-            </Btn>
+                >
+                    <CardMovie>
+                        <Image
+                            style={{ borderRadius: '0.7rem'}}
+                            layout="responsive"
+                            width={28}
+                            height={40}
+                            src={`/assets/${cover}`}
+                            alt={`Cover de film ${title}`}
+                        />
+                        <CardContent>
+                            <h2>{title}</h2>
+                        </CardContent>
+                    </CardMovie>
+                </Btn>
+            ) : 'Film introuvable'}
         </>
         
     )

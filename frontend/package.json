@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@heroicons/react": "^1.0.6",
     "buffer": "^6.0.3",
     "formik": "^2.2.9",
     "graceful-fs": "^4.2.10",

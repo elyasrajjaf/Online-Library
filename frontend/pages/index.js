@@ -66,6 +66,7 @@ export default function Index() {
 
   // State pour filtrer la recherche
   const [text, setText] = useState('')
+  const [valeur, setValeur] = useState('')
   
   const films = useQuery(GET_MOVIES)
   console.log(films)
@@ -80,6 +81,10 @@ export default function Index() {
   const errors = films.error || film.error;
   const loading = films.loading || film.loading;
 
+  const handleSearch = e => {
+    setText(valeur)
+  }
+
   if(loading) return 'Chargement...'
 
 
@@ -90,11 +95,15 @@ export default function Index() {
       >
         <Search>
           <input
-            type='search'
+            type='text'
             placeholder="Rechercher film..."
-            value={text}
-            onChange={e => setText(e.target.value)}
+            value={valeur}
+            onChange={e => setValeur(e.target.value)}
           />
+          <button
+            onClick={e => handleSearch()}
+          >Rechercher</button>
+
         </Search>
         <Titre>Films Anime Disponible</Titre>
         {text ? (

@@ -22,8 +22,13 @@ const resolvers = {
             return movie
         },
         searchMovie: async (_, {text}) => {
-            // Recherche le film par le nom d'auteur o le titre du film
+            // Recherche le film par le titre du film
             const movies = await Movie.find({ $text: { $search: text }})
+
+            if(!movies) {
+                throw new Error("Film introuvable")
+            }
+
             return movies
         }
     },

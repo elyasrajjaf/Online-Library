@@ -1,9 +1,9 @@
-import { useState } from "react"
 import { gql, useQuery } from "@apollo/client"
 import Layout from "../components/Layout"
 import FilmAccueil from "../components/FilmAccueil"
 
 import styled from "styled-components"
+import { useState } from "react"
 
 const Movie = styled.div`
     display: grid;
@@ -47,30 +47,37 @@ const GET_MOVIES = gql`
     getMovies {
       id
       title
-      author
       cover
-      description
-      publishedDate
-      duration
     }
   }
 `
+
 const SEARCH_MOVIE = gql`
   query searchMovie($text: String!) {
     searchMovie(text: $text) {
+      id
       title
-      author
+      cover
     }
   }
 `
 
 export default function Index() {
 
-  // Apollo
-  const { data, loading, error } = useQuery(GET_MOVIES)
-  // console.log(error)
+  // State pour filtrer la recherche
+  const [text, setText] = useState('dragon')
 
+  // Apollo
+  const { data, loading, error } = useQuery(GET_MOVIES, SEARCH_MOVIE, {
+    variables: {
+      text
+    }
+  })
+  
   if(loading) return 'Chargement...'
+  
+  const { getMovies, searchMovie } = data
+  console.log(searchMovie)
 
   return (
     <>
@@ -89,7 +96,7 @@ export default function Index() {
           >Rechercher</button>
         </Search>
         <Titre>Films Anime Disponible</Titre>
-          <Movie>{data.getMovies.map( movie => (
+          <Movie>{getMovies.map( movie => (
             <FilmAccueil
               key={movie.id}
               movie={movie}

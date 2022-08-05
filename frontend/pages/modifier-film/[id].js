@@ -169,130 +169,143 @@ const UpdateMovie = () => {
         } catch (error) {
             console.log(error)
         }
+        
     }
 
-    return (
-      <Layout
-        page={'Modification'}
-      >
-        <UptdMovie>
-          <Formik
-            validationSchema={schemaValidation}
-            enableReinitialize
-            initialValues={ getMovie }
-            onSubmit={ (values) => {
-                modificationFilm(values)
-            }}
-          >
-            {props => {
-                //console.log(props)
-                return(
-                    
-                <Form
-                    onSubmit={props.handleSubmit}
-                >
-                    <Titre>Modifier un film</Titre>
-                    <Label>
-                        <Input
-                            id="title"
-                            type="text"
-                            placeholder="Titre de film"
-                            value={props.values.title}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                    </Label>
-                    {props.touched.title && props.errors.title ? (
-                        <Alerte>
-                            {props.errors.title}
-                        </Alerte>
-                    ) : null }
-                    <Label>
-                        <Input
-                            id="author"
-                            type="text"
-                            placeholder="L'auteur de film"
-                            value={props.values.author}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                    </Label>
-                    {props.touched.author && props.errors.author ? (
-                        <Alerte>
-                            {props.errors.author}
-                        </Alerte>
-                    ) : null }
-                    <Label>
-                        <Text
-                            id="description"
-                            placeholder="Description de film"
-                            value={props.values.description}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                    </Label>
-                    {props.touched.description && props.errors.description ? (
-                        <Alerte>
-                            {props.errors.description}
-                        </Alerte>
-                    ) : null }
-                    <Label>
-                        <Input
-                            id="cover"
-                            type="text"
-                            placeholder="Couverture de film"
-                            value={props.values.cover}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                    </Label>
-                    {props.touched.cover && props.errors.cover ? (
-                        <Alerte>
-                            {props.errors.cover}
-                        </Alerte>
-                    ) : null }
-                    <Label>
-                        <Input
-                            id="duration"
-                            type="number"
-                            placeholder="Duration de film"
-                            value={props.values.duration}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                    </Label>
-                    {props.touched.duration && props.errors.duration ? (
-                        <Alerte>
-                            {props.errors.duration}
-                        </Alerte>
-                    ) : null }
-                    <Label>
-                        <Input
-                            id="publishedDate"
-                            type="date"
-                            value={props.publishedDate}
-                            // value={dateFormat(Number(props.values.publishedDate))}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                    </Label>
-                    {props.touched.publishedDate && props.errors.publishedDate ? (
-                        <Alerte>
-                            {props.errors.publishedDate}
-                        </Alerte>
-                    ) : null }
 
-                    <Btn
-                        type="submit"
-                        value='Mettre à jour'
-                    />
-                </Form>
-                )
-            }}
-          </Formik>
-        </UptdMovie>
-      </Layout>
-    )
+    if(id === getMovie?.id ) {
+        return (
+          <Layout
+            page={'Modification'}
+          >
+            <UptdMovie>
+              <Formik
+                validationSchema={schemaValidation}
+                enableReinitialize
+                initialValues={ getMovie }
+                onSubmit={ (values) => {
+                    modificationFilm(values)
+                }}
+              >
+                {props => {
+                    //console.log(props)
+                    return(
+                        
+                    <Form
+                        onSubmit={props.handleSubmit}
+                    >
+                        <Titre>Modifier un film</Titre>
+                        <Label>
+                            <Input
+                                id="title"
+                                type="text"
+                                placeholder="Titre de film"
+                                value={props.values.title}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                        </Label>
+                        {props.touched.title && props.errors.title ? (
+                            <Alerte>
+                                {props.errors.title}
+                            </Alerte>
+                        ) : null }
+                        <Label>
+                            <Input
+                                id="author"
+                                type="text"
+                                placeholder="L'auteur de film"
+                                value={props.values.author}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                        </Label>
+                        {props.touched.author && props.errors.author ? (
+                            <Alerte>
+                                {props.errors.author}
+                            </Alerte>
+                        ) : null }
+                        <Label>
+                            <Text
+                                id="description"
+                                placeholder="Description de film"
+                                value={props.values.description}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                        </Label>
+                        {props.touched.description && props.errors.description ? (
+                            <Alerte>
+                                {props.errors.description}
+                            </Alerte>
+                        ) : null }
+                        <Label>
+                            <Input
+                                id="cover"
+                                type="text"
+                                placeholder="Couverture de film"
+                                value={props.values.cover}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                        </Label>
+                        {props.touched.cover && props.errors.cover ? (
+                            <Alerte>
+                                {props.errors.cover}
+                            </Alerte>
+                        ) : null }
+                        <Label>
+                            <Input
+                                id="duration"
+                                type="number"
+                                placeholder="Duration de film"
+                                value={props.values.duration}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                        </Label>
+                        {props.touched.duration && props.errors.duration ? (
+                            <Alerte>
+                                {props.errors.duration}
+                            </Alerte>
+                        ) : null }
+                        <Label>
+                            <Input
+                                id="publishedDate"
+                                type="date"
+                                value={props.publishedDate}
+                                // value={dateFormat(Number(props.values.publishedDate))}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                        </Label>
+                        {props.touched.publishedDate && props.errors.publishedDate ? (
+                            <Alerte>
+                                {props.errors.publishedDate}
+                            </Alerte>
+                        ) : null }
+    
+                        <Btn
+                            type="submit"
+                            value='Mettre à jour'
+                        />
+                    </Form>
+                    )
+                }}
+              </Formik>
+            </UptdMovie>
+          </Layout>
+        )
+    } else {
+        return (
+            <Layout
+                page={'Film non trouvé'}
+            >
+                <h1>Film introuvable</h1>
+            </Layout>
+        )
+    }
+   
 }
 
 export default UpdateMovie

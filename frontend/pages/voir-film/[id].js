@@ -106,7 +106,9 @@ const PreviewMovie = () => {
                     </Content>
                 </CardMovie>
             </div>
-            ) : 'Film introuvable'}
+            ) : (
+                <h1>Film introuvable</h1>
+            )}
             
         </Layout>
     )
